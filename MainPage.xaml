@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:PixFrameWorkspace.ViewModels"
+             x:Class="PixFrameWorkspace.MainPage"
+             Title="Kundenverwaltung">
+
+    <ContentPage.BindingContext>
+        <viewmodel:CustomerViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Eingabeformular -->
+            <Entry Placeholder="Kundennummer" Text="{Binding ID}" />
+            <Entry Placeholder="Herr/Frau/divers" Text="{Binding Salutation}" />
+            <Entry Placeholder="Titel" Text="{Binding Titel}" />
+            <Entry Placeholder="Vorname" Text="{Binding FirstName}" />
+            <Entry Placeholder="Nachname" Text="{Binding LastName}" />
+            <Entry Placeholder="Adresse" Text="{Binding Address}" />
+            <Entry Placeholder="PLZ" Text="{Binding PostalCode}" />
+            <Entry Placeholder="Stadt" Text="{Binding City}" />
+            <Entry Placeholder="E-Mail" Text="{Binding Email}" />
+            <Entry Placeholder="Telefon" Text="{Binding Phone}" />
+            <Entry Placeholder="Ablage" Text="{Binding Folder}" />
+
+                <Button Text="Kunde hinzufügen" Command="{Binding AddCustomerCommand}" />
+
+            <!-- Kundenliste -->
+            <Label Text="Gespeicherte Kunden:" FontAttributes="Bold" />
+
+            <CollectionView ItemsSource="{Binding Customers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding ID}" FontSize="16" />
+                                <Label Text="{Binding Salutation}" FontSize="12" />
+                                <Label Text="{Binding Titel}" FontSize="12" />
+                                <Label Text="{Binding FirstName}" FontSize="12" />
+                                <Label Text="{Binding LastName}" FontSize="12" />
+                                <Label Text="{Binding Address}" FontSize="12" />
+                                <Label Text="{Binding PostalCode}" FontSize="12" />
+                                <Label Text="{Binding City}" FontSize="12" />
+                                <Label Text="{Binding Email}" FontSize="12" />
+                                <Label Text="{Binding Phone}" FontSize="12" />
+                                <Label Text="{Binding Folder}" FontSize="12" />
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1" 
+                                    Text="Löschen" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CustomerViewModel}}, Path=RemoveCustomerCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
