@@ -1,0 +1,75 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PixFrameWorkspace.ViewModels"
+             xmlns:controls="clr-namespace:PixFrameWorkspace.Controls"
+             x:Class="PixFrameWorkspace.Views.CustomersPage"
+             Title="Kundenverwaltung">
+
+    <ContentPage.BindingContext>
+        <vm:CustomerViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Suchleiste und Filter -->
+        <Grid Grid.Row="0" Padding="10" ColumnDefinitions="*,Auto,Auto">
+            <SearchBar x:Name="SearchBar" 
+                       Placeholder="Kunden suchen..."
+                       TextChanged="OnSearchTextChanged"
+                       Grid.Column="0" />
+
+            <Picker Grid.Column="1" 
+                    Title="Filter"
+                    WidthRequest="120">
+                <Picker.Items>
+                    <x:String>Aktiv</x:String>
+                    <x:String>Inaktiv</x:String>
+                    <x:String>Alle</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Grid.Column="2" 
+                    Text="Neuer Kunde"
+                    Command="{Binding StartAddCustomerCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White" />
+        </Grid>
+
+        <!-- Kundenliste -->
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding LoadCustomersCommand}">
+            <CollectionView ItemsSource="{Binding Customers}"
+                            SelectionMode="None"
+                            EmptyView="Keine Kunden gefunden">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CustomerCard />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Bearbeitungsformular (Modal) -->
+        <Grid Grid.Row="0" Grid.RowSpan="3"
+              IsVisible="{Binding IsEditing}"
+              BackgroundColor="#80000000"
+              Opacity="0.9">
+            <Frame VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   WidthRequest="400"
+                   Padding="20">
+                <ScrollView>
+                    <controls:CustomerEditForm />
+                </ScrollView>
+            </Frame>
+        </Grid>
+
+        <!-- Ladeindikator -->
+        <ActivityIndicator Grid.Row="0" Grid.RowSpan="3"
+                            IsRunning="{Binding IsBusy}"
+                            IsVisible="{Binding IsBusy}"
+                            Color="{StaticResource Primary}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+    </Grid>
+</ContentPage>
