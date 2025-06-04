@@ -69,4 +69,10 @@
 	  <Folder Include="Views\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="CustomersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
