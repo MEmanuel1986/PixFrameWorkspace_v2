@@ -19,7 +19,8 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
 		<!-- Display name -->
 		<ApplicationTitle>PixFrameWorkspace</ApplicationTitle>
 
@@ -60,16 +61,54 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Models - Kopieren\**" />
+	  <EmbeddedResource Remove="Models - Kopieren\**" />
+	  <MauiCss Remove="Models - Kopieren\**" />
+	  <MauiXaml Remove="Models - Kopieren\**" />
+	  <None Remove="Models - Kopieren\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Include="App.xaml.cs" />
+	  <Compile Include="AppShell.xaml.cs" />
+	  <Compile Include="Customer.cs" />
+	  <Compile Include="MainPage.xaml.cs" />
+	  <Compile Include="MauiProgram.cs" />
+	  <Compile Include="Models\Customer.cs" />
+	  <Compile Include="Services\CustomerService.cs" />
+	  <Compile Include="ViewModels\CustomerViewModel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Models\.vs\Models\v17\DocumentLayout.json" />
+	  <Content Include="Models\.vs\VSWorkspaceState.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.70" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Models\.vs\Models\copilot-chat\872ed4a5\sessions\" />
 	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="Models\.vs\Models\CopilotIndices\17.13.433.20974\CodeChunks.db" />
+	  <None Include="Models\.vs\Models\CopilotIndices\17.13.433.20974\SemanticSymbols.db" />
+	  <None Include="Models\.vs\Models\FileContentIndex\69fd436c-d2bc-4aeb-87d3-99239660c958.vsidx" />
+	  <None Include="Models\.vs\slnx.sqlite" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AppShell - Kopieren.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CustomersPage - Kopieren.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="CustomersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
