@@ -1,32 +1,32 @@
 ﻿using Microsoft.Extensions.Logging;
 using PixFrameWorkspace.Services;
 using PixFrameWorkspace.ViewModels;
+using PixFrameWorkspace.Views;
 
-builder.Services.AddSingleton<CustomerService>();
-builder.Services.AddTransient<CustomerViewModel>();
-builder.Services.AddTransient<MainPage>();
+namespace PixFrameWorkspace;
 
-namespace PixFrameWorkspace
+public static class MauiProgram
 {
-    public static class MauiProgram
+    public static MauiApp CreateMauiApp()
     {
-        public static MauiApp CreateMauiApp()
-        {
-            var builder = MauiApp.CreateBuilder();
-            builder
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            });
+
+        // DI-Registrierungen
+        builder.Services.AddSingleton<CustomerService>();
+        builder.Services.AddTransient<CustomerViewModel>();
+        builder.Services.AddTransient<MainPage>();
 
 #if DEBUG
-            builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
-        }
+        return builder.Build();
     }
 }
-
