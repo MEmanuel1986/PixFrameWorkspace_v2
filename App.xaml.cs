@@ -9,9 +9,9 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        MainPage = new AppShell();  // Geändert von MainPage zu AppShell
+        MainPage = new MainPage();
     }
 
-    // WICHTIG: Diese Methode muss hinzugefügt werden
-    protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+    // WICHTIG: Diese Methode muss vorhanden sein
+    public static override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
