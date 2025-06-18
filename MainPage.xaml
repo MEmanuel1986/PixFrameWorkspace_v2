@@ -5,9 +5,7 @@
              x:Class="PixFrameWorkspace.MainPage"
              Title="Kundenverwaltung">
 
-    <ContentPage.BindingContext>
-        <viewmodel:CustomerViewModel />
-    </ContentPage.BindingContext>
+    <!-- BindingContext wird jetzt über DI gesetzt -->
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
@@ -24,7 +22,7 @@
             <Entry Placeholder="Telefon" Text="{Binding Phone}" />
             <Entry Placeholder="Ablage" Text="{Binding Folder}" />
 
-                <Button Text="Kunde hinzufügen" Command="{Binding AddCustomerCommand}" />
+            <Button Text="Kunde hinzufügen" Command="{Binding AddCustomerCommand}" />
 
             <!-- Kundenliste -->
             <Label Text="Gespeicherte Kunden:" FontAttributes="Bold" />

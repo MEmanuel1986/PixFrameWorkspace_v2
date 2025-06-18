@@ -1,13 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using PixFrameWorkspace;
 using PixFrameWorkspace.Services;
 using PixFrameWorkspace.Models;
 
@@ -73,11 +66,16 @@ namespace PixFrameWorkspace.ViewModels
         {
             var customer = new Customer
             {
+                Salutation = Salutation,
+                Titel = Titel,
                 FirstName = FirstName,
                 LastName = LastName,
                 Address = Address,
                 PostalCode = PostalCode,
-                City = City
+                City = City,
+                Email = Email,
+                Phone = Phone,
+                Folder = Folder
             };
 
             _customerService.SaveCustomer(customer);
@@ -94,12 +92,16 @@ namespace PixFrameWorkspace.ViewModels
 
         private void ClearForm()
         {
+            Salutation = string.Empty;
+            Titel = string.Empty;
             FirstName = string.Empty;
             LastName = string.Empty;
             Address = string.Empty;
             PostalCode = string.Empty;
             City = string.Empty;
+            Email = string.Empty;
+            Phone = string.Empty;
+            Folder = string.Empty;
         }
     }
 }
-
