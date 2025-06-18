@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PixFrameWorkspace;
+
+﻿using System.Collections.ObjectModel;
+using System.IO;
+
 using PixFrameWorkspace.Models;
 
 namespace PixFrameWorkspace.Services
@@ -12,6 +9,7 @@ namespace PixFrameWorkspace.Services
     public class CustomerService
     {
         private readonly string _filePath;
+        private static readonly object _fileLock = new object();
 
         public CustomerService()
         {
@@ -24,13 +22,16 @@ namespace PixFrameWorkspace.Services
         {
             var customers = new ObservableCollection<Customer>();
 
-            if (File.Exists(_filePath))
+            lock (_fileLock)
             {
-                foreach (var line in File.ReadAllLines(_filePath))
+                if (File.Exists(_filePath))
                 {
-                    if (!string.IsNullOrWhiteSpace(line))
+                    foreach (var line in File.ReadAllLines(_filePath))
                     {
-                        customers.Add(Customer.FromString(line));
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            customers.Add(Customer.FromString(line));
+                        }
                     }
                 }
             }
@@ -41,16 +42,26 @@ namespace PixFrameWorkspace.Services
         public void SaveCustomer(Customer customer)
         {
             var line = customer.ToString();
-            File.AppendAllLines(_filePath, new[] { line });
+
+            lock (_fileLock)
+            {
+                File.AppendAllText(_filePath, line + Environment.NewLine);
+            }
         }
 
         public void DeleteCustomer(Customer customer)
         {
-            var lines = File.ReadAllLines(_filePath)
-                .Where(l => l != customer.ToString())
-                .ToArray();
+            lock (_fileLock)
+            {
+                if (File.Exists(_filePath))
+                {
+                    var lines = File.ReadAllLines(_filePath)
+                        .Where(l => l != customer.ToString())
+                        .ToArray();
 
-            File.WriteAllLines(_filePath, lines);
+                    File.WriteAllLines(_filePath, lines);
+                }
+            }
         }
     }
 }
