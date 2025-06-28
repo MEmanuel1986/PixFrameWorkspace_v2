@@ -54,7 +54,7 @@ namespace PixFrameWorkspace.Services
                 if (File.Exists(_filePath))
                 {
                     var lines = File.ReadAllLines(_filePath)
-                        .Where(l => l != customer.ToString())
+                        .Where(l => !string.IsNullOrWhiteSpace(l) && Customer.FromString(l).Id != customer.Id)
                         .ToArray();
 
                     File.WriteAllLines(_filePath, lines);

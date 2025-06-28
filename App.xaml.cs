@@ -1,16 +1,14 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;
-using Microsoft.Maui.Hosting;
 
-namespace PixFrameWorkspace;
-
-public partial class App : Application
+namespace PixFrameWorkspace.WinUI
 {
-    public App()
+    public partial class App : Microsoft.Maui.MauiWinUIApplication
     {
-        InitializeComponent();
-        MainPage = new AppShell();
+        protected override MauiApp CreateMauiApp()
+        {
+            return MauiProgram.CreateMauiApp();
+        }
     }
-
 }

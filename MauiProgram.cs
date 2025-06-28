@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui;
-using Microsoft.Maui.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using PixFrameWorkspace.Services;
 using PixFrameWorkspace.ViewModels;
 using PixFrameWorkspace.Views;
@@ -13,16 +11,20 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
         builder
-            .UseMauiApp<App>()  // Wichtig: Verweis auf Ihre App-Klasse
+            .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // Dependency Injection
+        // Services
         builder.Services.AddSingleton<CustomerService>();
+
+        // ViewModels
         builder.Services.AddTransient<CustomerViewModel>();
+
+        // Views
         builder.Services.AddTransient<MainPage>(sp =>
             new MainPage { BindingContext = sp.GetRequiredService<CustomerViewModel>() });
 
