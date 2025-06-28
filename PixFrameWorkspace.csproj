@@ -63,24 +63,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\.vs\Models\copilot-chat\872ed4a5\sessions\" />
 	  <Folder Include="Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="Models\.vs\Models\CopilotIndices\17.13.433.20974\CodeChunks.db" />
-	  <None Include="Models\.vs\Models\CopilotIndices\17.13.433.20974\SemanticSymbols.db" />
-	  <None Include="Models\.vs\Models\FileContentIndex\69fd436c-d2bc-4aeb-87d3-99239660c958.vsidx" />
-	  <None Include="Models\.vs\slnx.sqlite" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="AppShell - Kopieren.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="CustomersPage - Kopieren.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="CustomersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
